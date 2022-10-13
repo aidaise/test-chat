@@ -97,7 +97,6 @@ export default {
 
     this.socket.onmessage = (event) => {
       let parsedMessage = JSON.parse(event.data);
-      console.log('parsedMessage', event);
       store.commit('ADD_MSG', parsedMessage)
     }
   },
