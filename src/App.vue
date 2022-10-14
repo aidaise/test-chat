@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="main-container">
-    <p class="main-container_title">Привет, {{user}}!</p>
+    <p v-if="user" class="main-container_title">Привет, {{user}}!</p>
     <div class="chat" :class="isFirstLoad && !isSessionActive ? 'blur' : ''">
       <section class="chat_msg">
         <p
@@ -20,12 +20,11 @@
             @submit.prevent="sendMessage"
         >
           <input
-              class="chat_input"
               v-model="msg"
               type="text"
               placeholder="Напиши свое сообщение"
           >
-          <button class="chat_btn" type="submit">Send</button>
+          <button class="chat_btn accept button" type="submit">Отправить</button>
         </form>
       </section>
     </div>
@@ -57,7 +56,7 @@ export default {
       time: '',
       msg: '',
       username: '',
-      user: 'Гость',
+      user: sessionStorage.getItem('username'),
       isFirstLoad: true
     }
   },
@@ -109,6 +108,9 @@ button[disabled]{
   background-color: #cccccc;
   color: #666666;
   box-shadow: none;
+}
+.button {
+ margin-top: 0;
 }
 
 </style>
