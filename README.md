@@ -10,15 +10,10 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles and run express app
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm run express
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### For testing, open the chat (http://localhost:8080/ ) in two different browsers.
+### Login with different names and chat :)

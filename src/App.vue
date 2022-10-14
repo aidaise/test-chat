@@ -48,7 +48,6 @@
 <script>
 import store from './store/store'
 import './css/index.scss'
-// import mapActions from "vuex";
 
 export default {
   name: 'App',
