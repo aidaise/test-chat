@@ -23,12 +23,14 @@ body, html {
   font-size: .8em;
   background: #F1F0F0;
   color: black;
+  margin-left: 3%;
 }
 img {
   width: 82px;
   margin-bottom: 15px;
 }
 button.accept {
+  cursor: pointer;
   background-color: #ed6755;
   border: none;
   border-radius: 5px;
@@ -106,7 +108,7 @@ input{
     height: 100%;
     border-radius: 8px;
     background: white;
-    padding: 1em;
+    //padding: 1em;
     overflow: auto;
     max-width: 350px;
     margin: 0 auto 24px auto;
@@ -120,7 +122,7 @@ input{
   }
   &_form {
     width: 100%;
-    padding: .5em;
+    //padding: .5em;
   }
   &_input{
     width: 90%;

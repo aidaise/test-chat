@@ -39,7 +39,7 @@
             type="text"
             placeholder="Напиши свое имя :)"
         >
-        <button @click="saveUser" class="accept">Сохранить</button>
+        <button @click="saveUser" class="accept" :disabled="!username">Сохранить</button>
       </div>
     </div>
   </div>
@@ -57,13 +57,11 @@ export default {
       time: '',
       msg: '',
       username: '',
+      user: 'Гость',
       isFirstLoad: true
     }
   },
   computed: {
-    user () {
-      return sessionStorage.getItem('username')
-    },
     isSessionActive () {
       return !!sessionStorage.getItem('username')
     },
@@ -74,6 +72,8 @@ export default {
   methods: {
     saveUser () {
       sessionStorage.setItem('username', this.username)
+      this.user = sessionStorage.getItem('username')
+      store.dispatch('GET_MSG')
       this.isFirstLoad = false
     },
     sendMessage() {
@@ -86,7 +86,7 @@ export default {
     }
   },
   async mounted() {
-    await store.dispatch('GET_MSG')
+    if (sessionStorage.getItem('username')) await store.dispatch('GET_MSG')
 
     this.socket = await new WebSocket("ws://localhost:3000/web-socket");
 
@@ -94,10 +94,21 @@ export default {
       console.log('Websocket connected.');
     }
 
-    this.socket.onmessage = (event) => {
-      let parsedMessage = JSON.parse(event.data);
-      store.commit('ADD_MSG', parsedMessage)
+    this.socket.onmessage = () => {
+      // let parsedMessage = JSON.parse(event.data);
+      // store.commit('ADD_MSG', parsedMessage)
+      store.dispatch('GET_MSG')
     }
   },
 }
 </script>
+<style scoped>
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  box-shadow: none;
+}
+
+</style>
